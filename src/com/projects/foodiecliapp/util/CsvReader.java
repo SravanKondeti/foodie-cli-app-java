@@ -58,6 +58,7 @@ public class CsvReader {
                 dish.setName(data[1]);
                 dish.setDescription(data[2]);
                 dish.setPrice(data[3]);
+                dishesList.add(dish);
             }
         }catch (IOException e){
             System.out.println("Path not found in path : " + dishesCsvFilePath);
@@ -84,6 +85,7 @@ public class CsvReader {
                         .setName(data[1])
                         .setAddress(data[2])
                         .getMenu().add(data[3]);
+                restaurantList.add(restaurant);
             }
         }catch (IOException e){
             System.out.println("Path not found in path : " + restaurantCsvFilePath);
