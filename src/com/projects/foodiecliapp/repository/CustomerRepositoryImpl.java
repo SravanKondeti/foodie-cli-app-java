@@ -4,6 +4,7 @@ import com.projects.foodiecliapp.model.Customer;
 import com.projects.foodiecliapp.util.CsvReader;
 
 import java.util.List;
+import java.util.Optional;
 
 public class CustomerRepositoryImpl implements CustomerRepository{
 
@@ -21,9 +22,16 @@ public class CustomerRepositoryImpl implements CustomerRepository{
     }
 
     @Override
-    public Customer getCustomerById() {
+    public Customer save(Customer customer) {
+        this.customerList.add(customer);
+        return customer;
+    }
 
-        return null;
+    @Override
+    public Optional<Customer> getCustomerById(String id) {
+
+        return this.customerList.stream().filter(customer -> customer.getCustomerId().equals(id)).findFirst();
+
     }
 
 }
