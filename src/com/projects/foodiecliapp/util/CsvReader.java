@@ -8,19 +8,19 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class CsvReader {
+
 
     public List<Customer> readCustomersFromCsv(){
 
         List<Customer> customersList = new ArrayList<>();
 
         String customersCsvFilePath = "D:\\Java Full Stack\\Projects\\foodie-clie-app-java\\data\\customers.csv";
-
+        String line;
         try(BufferedReader br = new BufferedReader(new FileReader(customersCsvFilePath))){
-
-            String line;
             String splitBy = ",";
             br.readLine();
             while ((line = br.readLine()) != null){
@@ -33,7 +33,6 @@ public class CsvReader {
                 customersList.add(customer);
             }
         }catch(IOException e){
-
             System.out.println("Path not found in path : "+customersCsvFilePath);
             System.exit(0);
             e.printStackTrace();
@@ -41,15 +40,16 @@ public class CsvReader {
         return customersList;
     }
 
+
     public List<Dish> readDishesFromCsv(){
 
         List<Dish> dishesList = new ArrayList<>();
 
         String dishesCsvFilePath = "D:\\Java Full Stack\\Projects\\foodie-clie-app-java\\data\\dishes.csv";
-
+        String line;
         try(BufferedReader br = new BufferedReader(new FileReader(dishesCsvFilePath))){
             String splitBy = ",";
-            String line;
+
             br.readLine();
             while ((line = br.readLine()) != null){
                 String[] data = line.split(splitBy);
@@ -70,13 +70,13 @@ public class CsvReader {
 
     public List<Restaurant> readRestaurantsFromCsv(){
 
-        List<Restaurant> restaurantList = new ArrayList<>();
-
         String restaurantCsvFilePath = "D:\\Java Full Stack\\Projects\\foodie-clie-app-java\\data\\restaurants.csv";
+        String line;
+        List<Restaurant> restaurantList = new ArrayList<>();
 
         try(BufferedReader br = new BufferedReader(new FileReader(restaurantCsvFilePath))){
             String splitBy = ",";
-            String line;
+
             br.readLine();
             while ((line = br.readLine()) != null){
                 String[] data = line.split(splitBy);
@@ -84,14 +84,15 @@ public class CsvReader {
                 restaurant.setId(data[0])
                         .setName(data[1])
                         .setAddress(data[2])
-                        .getMenu().add(data[3]);
+                        .setMenu(Arrays.asList(data[3].split(":")));
                 restaurantList.add(restaurant);
             }
         }catch (IOException e){
             System.out.println("Path not found in path : " + restaurantCsvFilePath);
-            System.exit(0);
+//            System.exit(0);
             e.printStackTrace();
         }
         return restaurantList;
     }
+
 }
