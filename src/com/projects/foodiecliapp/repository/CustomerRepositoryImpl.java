@@ -34,4 +34,36 @@ public class CustomerRepositoryImpl implements CustomerRepository{
 
     }
 
+    @Override
+    public Optional<Customer> getCustomerByEmail(String email) {
+        return this.customerList.stream().filter(customer -> customer.getEmail().equals(email)).findFirst();
+    }
+
+    @Override
+    public Customer updateCustomer(Customer customerToBeUpdated) {
+
+        Optional<Customer> updateCustomer = this.customerList.stream().filter(customer -> customer.getCustomerId().equals(customerToBeUpdated.getCustomerId()))
+                .findFirst()
+                .map(customer -> {
+                        customer.setName(customerToBeUpdated.getName())
+                                .setEmail(customerToBeUpdated.getEmail())
+                                .setPassword(customerToBeUpdated.getPassword());
+                        return customer;
+                });
+        return updateCustomer.orElse(null);
+    }
+
+    @Override
+    public void deleteCustomer(Customer customerToBeDeleted) {
+        this.customerList.remove(customerToBeDeleted);
+    }
+
+    @Override
+    public Optional<Customer> findEmailAndPassword(String email, String password) {
+        return this.customerList.stream().filter(
+                customer -> customer.getEmail().equalsIgnoreCase(email)
+                        && customer.getPassword().equals(password))
+                .findFirst();
+    }
+
 }
