@@ -7,7 +7,7 @@ public class Dish {
     private String id;
     private String name;
     private String description;
-    private String price;
+    private double price;
 
     public Dish() {
     }
@@ -16,32 +16,36 @@ public class Dish {
         return id;
     }
 
-    public void setId(String id) {
+    public Dish setId(String id) {
         this.id = id;
+        return this;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public Dish setName(String name) {
         this.name = name;
+        return this;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public Dish setDescription(String description) {
         this.description = description;
+        return this;
     }
 
-    public String getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public Dish setPrice(Double price) {
         this.price = price;
+        return this;
     }
 
     @Override
