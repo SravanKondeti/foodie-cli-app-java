@@ -54,10 +54,10 @@ public class CsvReader {
             while ((line = br.readLine()) != null){
                 String[] data = line.split(splitBy);
                 Dish dish = new Dish();
-                dish.setId(data[0]);
-                dish.setName(data[1]);
-                dish.setDescription(data[2]);
-                dish.setPrice(data[3]);
+                dish.setId(data[0])
+                        .setName(data[1])
+                        .setDescription(data[2])
+                        .setPrice(Double.parseDouble(data[3]));
                 dishesList.add(dish);
             }
         }catch (IOException e){
