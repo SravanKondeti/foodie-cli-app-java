@@ -14,6 +14,6 @@ public interface CustomerRepository {
     public Optional<Customer> getCustomerByEmail(String email);
     public Customer updateCustomer(Customer customerToBeUpdated);
     public void deleteCustomer(Customer customerToBeDeleted);
-    public Optional<Customer> findEmailAndPassword(String email, String password);
+    public Optional<Customer> findByEmailAndPassword(String email, String password);
 
 }

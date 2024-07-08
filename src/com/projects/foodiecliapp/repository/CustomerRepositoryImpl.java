@@ -59,7 +59,7 @@ public class CustomerRepositoryImpl implements CustomerRepository{
     }
 
     @Override
-    public Optional<Customer> findEmailAndPassword(String email, String password) {
+    public Optional<Customer> findByEmailAndPassword(String email, String password) {
         return this.customerList.stream().filter(
                 customer -> customer.getEmail().equalsIgnoreCase(email)
                         && customer.getPassword().equals(password))
