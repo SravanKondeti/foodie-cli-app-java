@@ -109,10 +109,10 @@ public class CustomerMenu extends Menu{
         displayMenuHeader("Customers");
         System.out.printf("%-10s %-30s %-80s %-30s\n","Id","Name","Email", "Password");
         System.out.println(dashLine);
-       /* customerList.forEach(customer -> {
+        customerList.forEach(customer -> {
             System.out.printf("%-10s %-30s %-80s %-30s\n",customer.getCustomerId(),customer.getName(), customer.getEmail(), "*".repeat(customer.getPassword().length()));
-        }); */
-        customerList.forEach(this::displayCustomerDetails);
+        });
+//        customerList.forEach(this::displayCustomerDetails);
     }
 
     private void customerSearchForm() {
