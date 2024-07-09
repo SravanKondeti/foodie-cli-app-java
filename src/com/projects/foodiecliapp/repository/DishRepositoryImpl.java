@@ -30,4 +30,22 @@ public class DishRepositoryImpl implements DishRepository{
     public Optional<Dish> getDishById(String id) {
         return this.dishList.stream().filter(dish -> dish.getId().equals(id)).findFirst();
     }
+
+    @Override
+    public void deleteDish(Dish dishToBeDeleted) {
+        this.dishList.remove(dishToBeDeleted);
+    }
+
+    @Override
+    public Dish updateDish(Dish dishToBeUpdated) {
+        Optional<Dish> updateDish = this.dishList.stream().filter(dish -> dish.getId().equals(dishToBeUpdated.getId()))
+                .findFirst()
+                .map(dish -> {
+                    dish.setName(dishToBeUpdated.getName())
+                            .setPrice(dishToBeUpdated.getPrice())
+                            .setDescription(dishToBeUpdated.getDescription());
+                    return dish;
+                });
+        return updateDish.orElse(null);
+    }
 }
