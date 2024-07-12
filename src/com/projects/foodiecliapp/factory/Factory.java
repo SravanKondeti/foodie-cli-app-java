@@ -2,10 +2,13 @@ package com.projects.foodiecliapp.factory;
 
 import com.projects.foodiecliapp.controller.CustomerController;
 import com.projects.foodiecliapp.controller.DishController;
+import com.projects.foodiecliapp.controller.RestaurantController;
 import com.projects.foodiecliapp.repository.CustomerRepositoryImpl;
 import com.projects.foodiecliapp.repository.DishRepositoryImpl;
+import com.projects.foodiecliapp.repository.RestaurantRepositoryImpl;
 import com.projects.foodiecliapp.service.CustomerServiceImpl;
 import com.projects.foodiecliapp.service.DishServiceImpl;
+import com.projects.foodiecliapp.service.RestaurantServiceImpl;
 import com.projects.foodiecliapp.util.CsvReader;
 
 public class Factory {
@@ -26,6 +29,15 @@ public class Factory {
     public static DishServiceImpl getDishService(){ return Holder.dishService;}
     public static DishController getDishController(){ return Holder.dishController;}
 
+    public static RestaurantRepositoryImpl getRestaurantRepository(){
+        return Holder.restaurantRepository;
+    }
+    public static RestaurantServiceImpl getRestaurantService(){
+        return Holder.restaurantService;
+    }
+    public static RestaurantController getRestaurantController(){
+        return Holder.restaurantController;
+    }
 
     private static class Holder{
 
@@ -38,6 +50,10 @@ public class Factory {
         private static final DishRepositoryImpl dishRepository = new DishRepositoryImpl();
         private static final DishServiceImpl dishService = new DishServiceImpl(dishRepository);
         private static final DishController dishController = new DishController(dishService);
+
+        private static final RestaurantRepositoryImpl restaurantRepository = new RestaurantRepositoryImpl();
+        private static final RestaurantServiceImpl restaurantService = new RestaurantServiceImpl(restaurantRepository);
+        private static final RestaurantController restaurantController = new RestaurantController(restaurantService);
     }
 }
 
