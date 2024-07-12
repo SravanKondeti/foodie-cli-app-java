@@ -4,7 +4,6 @@ import com.projects.foodiecliapp.exceptions.RestaurantExistsException;
 import com.projects.foodiecliapp.exceptions.RestaurantNotFoundException;
 import com.projects.foodiecliapp.model.Restaurant;
 
-import java.sql.PreparedStatement;
 import java.util.List;
 
 public interface RestaurantService {
