@@ -22,7 +22,7 @@ public class OrderController {
         return this.orderService.getOrderById(Id);
     }
 
-    public Order saveOrder(Order order) throws OrderExistsException {
+    public Order save(Order order) throws OrderExistsException {
         return this.orderService.save(order);
     }
 
