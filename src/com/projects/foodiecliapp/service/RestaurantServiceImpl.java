@@ -1,18 +1,23 @@
 package com.projects.foodiecliapp.service;
 
+import com.projects.foodiecliapp.exceptions.DishNotFoundException;
 import com.projects.foodiecliapp.exceptions.RestaurantExistsException;
 import com.projects.foodiecliapp.exceptions.RestaurantNotFoundException;
+import com.projects.foodiecliapp.factory.Factory;
+import com.projects.foodiecliapp.model.Dish;
 import com.projects.foodiecliapp.model.Restaurant;
 import com.projects.foodiecliapp.repository.RestaurantRepository;
+import com.projects.foodiecliapp.repository.RestaurantRepositoryImpl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class RestaurantServiceImpl implements RestaurantService{
 
-    private RestaurantRepository restaurantRepository;
+    private RestaurantRepositoryImpl restaurantRepository;
 
-    public RestaurantServiceImpl(RestaurantRepository restaurantRepository) {
+    public RestaurantServiceImpl(RestaurantRepositoryImpl restaurantRepository) {
         this.restaurantRepository = restaurantRepository;
     }
 
@@ -52,4 +57,21 @@ public class RestaurantServiceImpl implements RestaurantService{
             throw new RestaurantNotFoundException("Restaurant not found with Id : " + Id);
         this.restaurantRepository.deleteRestaurant(restaurant.get());
     }
+
+    @Override
+    public List<Dish> getDishItems(String id) throws RestaurantNotFoundException, DishNotFoundException {
+        Optional<Restaurant> restaurantById = this.restaurantRepository.getRestaurantById(id);
+        if(restaurantById.isEmpty())
+            throw new RestaurantNotFoundException("Restaurant not found with Id : " + id);
+        List<Dish> dishList = new ArrayList<>();
+        Restaurant restaurant = restaurantById.get();
+        List<String> dishIds = restaurant.getMenu();
+        DishService dishService = Factory.getDishService();
+        for(String dishId : dishIds){
+            Dish dish = dishService.getDishById(dishId);
+            dishList.add(dish);
+        }
+        return dishList;
+    }
+
 }
