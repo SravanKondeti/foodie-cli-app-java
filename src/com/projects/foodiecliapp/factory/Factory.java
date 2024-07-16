@@ -2,12 +2,15 @@ package com.projects.foodiecliapp.factory;
 
 import com.projects.foodiecliapp.controller.CustomerController;
 import com.projects.foodiecliapp.controller.DishController;
+import com.projects.foodiecliapp.controller.OrderController;
 import com.projects.foodiecliapp.controller.RestaurantController;
 import com.projects.foodiecliapp.repository.CustomerRepositoryImpl;
 import com.projects.foodiecliapp.repository.DishRepositoryImpl;
+import com.projects.foodiecliapp.repository.OrderRepositoryImpl;
 import com.projects.foodiecliapp.repository.RestaurantRepositoryImpl;
 import com.projects.foodiecliapp.service.CustomerServiceImpl;
 import com.projects.foodiecliapp.service.DishServiceImpl;
+import com.projects.foodiecliapp.service.OrderServiceImpl;
 import com.projects.foodiecliapp.service.RestaurantServiceImpl;
 import com.projects.foodiecliapp.util.CsvReader;
 
@@ -39,6 +42,17 @@ public class Factory {
         return Holder.restaurantController;
     }
 
+    public static OrderRepositoryImpl getOrderRepository(){
+        return Holder.orderRepository;
+    }
+    public static OrderServiceImpl getOrderService(){
+        return Holder.orderService;
+    }
+    public static OrderController getOrderController(){
+        return Holder.orderController;
+    }
+
+
     private static class Holder{
 
         private static final CsvReader csvReader = new CsvReader();
@@ -54,6 +68,10 @@ public class Factory {
         private static final RestaurantRepositoryImpl restaurantRepository = new RestaurantRepositoryImpl();
         private static final RestaurantServiceImpl restaurantService = new RestaurantServiceImpl(restaurantRepository);
         private static final RestaurantController restaurantController = new RestaurantController(restaurantService);
+
+        private static final OrderRepositoryImpl orderRepository = new OrderRepositoryImpl();
+        private static final OrderServiceImpl orderService = new OrderServiceImpl(orderRepository);
+        private static final OrderController orderController = new OrderController(orderService);
     }
 }
 
