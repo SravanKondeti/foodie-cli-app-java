@@ -1,10 +1,13 @@
 package com.projects.foodiecliapp.ui;
 
 import com.projects.foodiecliapp.controller.RestaurantController;
+import com.projects.foodiecliapp.exceptions.DishNotFoundException;
 import com.projects.foodiecliapp.exceptions.RestaurantExistsException;
 import com.projects.foodiecliapp.exceptions.RestaurantNotFoundException;
 import com.projects.foodiecliapp.factory.Factory;
+import com.projects.foodiecliapp.model.Dish;
 import com.projects.foodiecliapp.model.Restaurant;
+import com.projects.foodiecliapp.service.RestaurantService;
 
 import java.util.Arrays;
 import java.util.List;
@@ -110,7 +113,7 @@ public class RestaurantMenu extends Menu {
         }
     }
 
-    private void displayRestaurants() {
+    public void displayRestaurants() {
         List<Restaurant> restaurantList = this.restaurantController.getRestaurantList();
         displayMenuHeader("Restaurants");
         System.out.printf("%-10s %-30s %-80s %-30s\n", "Id", "Name", "Address", "Menu Items");
@@ -150,4 +153,14 @@ public class RestaurantMenu extends Menu {
         System.out.printf("%-10s %-30s %-80s %-30s\n", restaurant.getId(), restaurant.getName(), restaurant.getAddress(), String.join(":", restaurant.getMenu()));
     }
 
+    public void displayMenuItems(String restaurantId) throws RestaurantNotFoundException, DishNotFoundException {
+        displayMenuHeader("Dishes Menu Details");
+        System.out.printf("%-10s %-30s %-80s %-10s\n", "Id", "Name", "Description", "Price");
+        printDashLine();
+        RestaurantService restaurantService = Factory.getRestaurantService();
+        List<Dish> dishItems = restaurantService.getDishItems(restaurantId);
+        for(Dish dish : dishItems){
+            System.out.printf("%-10s %-30s %-80s %-10s\n", dish.getId(), dish.getName(), dish.getDescription(), String.format("$%.2f", dish.getPrice()));
+        }
+    }
 }
