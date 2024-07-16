@@ -129,7 +129,7 @@ public class CustomerMenu extends Menu{
         }
     }
 
-    private void customerLoginForm() {
+    public void customerLoginForm() {
         try{
             Scanner scanner = new Scanner(System.in);
             System.out.println("Please login entering the following details\n");
